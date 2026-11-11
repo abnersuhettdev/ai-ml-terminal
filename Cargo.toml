@@ -1,0 +1,42 @@
+[package]
+name = "terminal-aichat"
+description = "A cli for AI/LLM chat in terminal. Extremely simple and easy to use. Using OpenAI-compatible `/v1/chat/completion` API"
+authors = ["ctxinf"]
+repository = "https://github.com/ctxinf/terminal-aichat"
+license = "MIT"
+version = "2.2.1"
+edition = "2024"
+homepage = "https://github.com/ctxinf/terminal-aichat"
+
+[package.metadata.wix]
+upgrade-guid = "82D9C73C-A524-40CF-B7BB-F4535F1BB605"
+path-guid = "F48B7532-8194-4C16-9135-BF30FA4798B2"
+license = false
+eula = false
+
+[[bin]]
+name = "aichat"
+path = "src/main.rs"
+
+[dependencies]
+libc = "0.2"
+reqwest = { version = "0.12", default-features = false, features = ["json", "stream", "rustls-tls"] }
+eventsource-stream = "0.2"
+argon2 = "0.5"
+serde_path_to_error = "0.1"
+clap = { version = "4.5.47", features = ["derive","cargo","env"] }
+crossterm = "0.29"
+futures = "0.3.31"
+serde = { version = "1.0.188", features = ["derive"] }
+serde_json = "1.0.143"
+serde_json_lenient = "0.2"
+tokio = {version="1.47.1", features=["full"]}
+dirs = "6.0"
+base64 = "0.22"
+aes-gcm = "0.10.3"
+chrono = { version = "0.4", features = ["serde"] }
+
+# The profile that 'dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
